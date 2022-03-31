@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Gym.Pages;
+using Storage;
 
 namespace Gym
 {
@@ -20,6 +22,7 @@ namespace Gym
     /// </summary>
     public partial class LoginPage : Window
     {
+        AppDbContext db;
         public LoginPage()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace Gym
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            db = new AppDbContext();
+            db.Database.CreateIfNotExists();
             ClientsList clientsList = new ClientsList();
             clientsList.Show();
         }
